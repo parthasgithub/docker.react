@@ -1,0 +1,10 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t -f partha/dockerreact Dockerfile.dev .
+
+script:
+  - docker run -e CI=true partha/dockerreact npm run test
