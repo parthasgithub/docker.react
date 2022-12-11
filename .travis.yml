@@ -7,4 +7,16 @@ before_install:
   - docker build -t partha/dockerreact -f  Dockerfile.dev .
 
 script:
-  - docker run -e CI=true partha/dockerreact npm run test
+  - docker run -e CI=true partha/dockerreact npm run test 
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-55644597897"
+  bucket_path: "docker"
+  on: 
+    branch: master
+  access_key_id: $aws-access-key
+  secret_access_key: "aws secret key"
